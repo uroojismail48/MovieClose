@@ -1,12 +1,17 @@
-import Main from "./components/Main"
-import Row from './components/Row'
+
+import Data from "./components/data";
+// import Main from "./components/Main"
+// import Row from './components/Row'
+
 function App() {
+
   return (
     <div className="h-screen w-full text-white ">
-    <Main/>
-    <Row/>
-    </div>
+
+
+   <Data/>
+  </div>
   )
 }
 
-export default App
+export default App;

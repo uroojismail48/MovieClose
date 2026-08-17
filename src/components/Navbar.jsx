@@ -4,9 +4,9 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full relative">
-      <div className="flex justify-between bg-black/50 items-center px-4 py-3">
-        <h1 className="font-bold text-xl">Agency</h1>
+    <div className="w-full relative ">
+      <div className="flex  rounded-md justify-between items-center px-4 py-3">
+        <h1 className="font-bold text-xl">MovieClose</h1>
 
         {/* Hamburger button - sirf mobile pe dikhega */}
         <button
