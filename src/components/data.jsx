@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Main from "./Main";
-
+import Cards from './Cards'
 function Data() {
   const [movies, setMovies] = useState([]);
   const apikey = import.meta.env.VITE_API_KEY;
@@ -21,6 +21,7 @@ function Data() {
   return (
     <div>
       <Main movies={movies} />
+    <Cards movies={movies}/>
     </div>
   );
 }

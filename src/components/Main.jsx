@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import Navbar from './Navbar'
 import Swiper from 'swiper';
 import "swiper/css";
-
+import {RiGooglePlayFill} from '@remixicon/react'
 function Main({movies}) {
     useEffect(()=> {
     new Swiper(".swiper",{
@@ -27,8 +27,29 @@ function Main({movies}) {
     src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
     alt={movie.title}
   />
-  <div className="absolute w-full h-full inset-0 bg-gradient-to-t from-black via-black/50 to-transparent z-10">
-    <h1>{movie.title}</h1>
+  <div className="absolute w-full h-full inset-0 bg-gradient-to-r from-black via-black/50 to-transparent z-10">
+  <div className="pl-20 w-160 gap-8  h-full flex justify-center items-start flex-col ">
+       <h1 className='text-7xl font-bold '>{movie.title}</h1>
+          <div className="flex justify-start  gap-5 "><h5>Available in : <b>{movie.original_language}</b></h5>
+           <p>Polularity: <b>
+             {
+            Math.floor(movie.popularity) / 100
+            }
+            </b> <span >({movie.popularity
+            }) </span> </p>
+            <p> released On : <b>{movie.release_date}</b></p>
+            </div>
+ <div className="">
+    <h1>{movie.overview}</h1>
+   </div>
+
+
+    <button className='border flex py-3 px-4 gap-3 rounded-md bg-white/20 cursor-pointer'>Watch Trailer <RiGooglePlayFill /></button>
+
+
+
+  </div>
+
   </div>
             </div>
 

@@ -1,15 +1,17 @@
 
 import Data from "./components/data";
-// import Main from "./components/Main"
-// import Row from './components/Row'
+import Cards from './components/Cards'
+
+
 
 function App() {
 
   return (
-    <div className="h-screen w-full text-white ">
+    <div className="h-screen w-full text-white bg-black ">
 
 
    <Data/>
+   <Cards/>
   </div>
   )
 }
