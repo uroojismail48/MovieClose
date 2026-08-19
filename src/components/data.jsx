@@ -19,9 +19,9 @@ function Data() {
   }, []);
 
   return (
-    <div>
+    <div className="w-full h-screen bg-black text-white">
       <Main movies={movies} />
-    <Cards movies={movies}/>
+  
     </div>
   );
 }

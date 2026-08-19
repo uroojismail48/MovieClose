@@ -4,11 +4,11 @@ function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
-    <div className="w-full relative ">
+    <div className="w-full relative font-mono ">
       <div className="flex  rounded-md justify-between items-center px-4 py-3">
      <div className="">
-         <h1 className="font-bold justify-center text-xl flex gap-2 items-center text-orange-700 text-center">
-          <span className="bg-orange-700 py-2 px-3
+         <h1 className="font-bold font-mono justify-center text-2xl flex gap-2 items-center text-red-700 text-center">
+          <span className="bg-black  py-2 px-3
 text-white         
          rounded-md text-center">
         Movie

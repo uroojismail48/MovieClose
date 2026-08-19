@@ -1,2 +1,6 @@
 @import "tailwindcss";
 
+/* index.css ya global css mein */
+html, body {
+  background-color: black;
+}

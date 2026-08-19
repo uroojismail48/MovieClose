@@ -1,14 +1,20 @@
 import { useEffect } from 'react';
 import Navbar from './Navbar'
 import Swiper from 'swiper';
+import { Autoplay } from 'swiper/modules'; 
+import Cards from './Cards'
 import "swiper/css";
 import {RiGooglePlayFill} from '@remixicon/react'
 function Main({movies}) {
     useEffect(()=> {
-    new Swiper(".swiper",{
+    new Swiper(".swiper", {
         slidesPerView:1,
         spaceBetween:20,
-    })
+         modules: [Autoplay], 
+          autoplay: {
+          delay: 3000,              
+          disableOnInteraction: false,
+    } })
 },[])
 
   return (
@@ -56,6 +62,9 @@ function Main({movies}) {
         ))}
     </div>
 </div>
+
+<Cards className="absolute z-999 -bottom-75 " />
+<div className="h-screen w-full bg-black"></div>
     </div>
   )
 }
