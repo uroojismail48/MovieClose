@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import "swiper/css";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
+import HorrorCard from './HorrorCard';
 function Vd() {
          const [movies, setMovies] = useState([])
         const [now] = useState(() => Date.now())
@@ -85,7 +86,8 @@ function Vd() {
 <div className="w-full h-screen bg-black relative">
 
 <div className="three  right-0  bg-red-600 absolute"></div>
-<div className="relative   w-full h-100 overflow-x-hidden mt-20 flex justify-center  pointer-events-none
+<div className="relative 
+  w-full h-100 overflow-x-hidden mt-20 flex justify-center  pointer-events-none
 items-center flex-1">
         {movies.length > 0 && (
 <Swiper 
@@ -116,8 +118,10 @@ className="w-full h-full  absolute"
       />
 <div className="absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
       <div className="absolute top-0 left-0 
-     
-      px-4 border  border-white/60 backdrop-blur-[2px] text-bold rounded-md ">
+     flex text-start
+      px-4 border 
+      
+      border-white/60 backdrop-blur-[2px] text-bold rounded-md ">
         <h1>{movie.title}</h1>
        
       </div>
@@ -142,7 +146,27 @@ className="w-full h-full  absolute"
 
 
 </div>
+<div 
 
+className="flex justify-start relative
+ items-center text-2xl font-sans  font-bold  ">
+<div className="three  left-0  bg-red-600 absolute"></div>
+
+        <h1 
+        style={{WebkitTextStroke:'1px red'}}
+        className="border rounded-sm bg-red-950 animate-pulse animate-ping 
+text-transparent
+        p-2 my-4">From Heros To Horror</h1>
+</div>
+<HorrorCard/>
+<div className="w-full h-1 bg-red-600 my-5">
+
+</div>
+<div className="h-screen w-full bg-black">
+   
+
+
+</div>
 </div>
 
 
@@ -151,4 +175,4 @@ className="w-full h-full  absolute"
   )
 }
 
-export default Vd
+export default Vd;
