@@ -7,13 +7,13 @@ function Navbar() {
     <div className="w-full relative font-mono ">
       <div className="flex  rounded-md justify-between items-center px-4 py-3">
      <div className="">
-         <h1 className="font-bold font-mono justify-center text-2xl flex gap-2 items-center text-red-700 text-center">
-          <span className="bg-black  py-2 px-3
+         <h1 className="font-bold font-mono justify-center text-2xl flex items-center text-red-700 text-center">
+          <span className=" 
 text-white         
          rounded-md text-center">
-        Movie
+     Cine
         </span>
-        Close</h1>
+        Flex</h1>
      </div>
 
         {/* Hamburger button - sirf mobile pe dikhega */}

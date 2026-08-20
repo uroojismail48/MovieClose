@@ -4,6 +4,8 @@ import Swiper from 'swiper';
 import { Autoplay } from 'swiper/modules'; 
 import Cards from './Cards'
 import "swiper/css";
+import Vd from './Vd';
+
 import {RiGooglePlayFill} from '@remixicon/react'
 function Main({movies}) {
     useEffect(()=> {
@@ -63,8 +65,11 @@ function Main({movies}) {
     </div>
 </div>
 
-<Cards className="absolute z-999 -bottom-75 " />
-<div className="h-screen w-full bg-black"></div>
+<Cards className="absolute z-99999 -bottom-80 " />
+
+<div className="h-screen w-full  mt-90 ">
+<Vd/>
+</div>
     </div>
   )
 }

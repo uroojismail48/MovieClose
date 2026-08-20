@@ -4,6 +4,7 @@ import Data from "./components/data";
 
 
 
+
 function App() {
 
   return (
@@ -11,7 +12,7 @@ function App() {
 
 
    <Data />
-   
+
   </div>
   )
 }

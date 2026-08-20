@@ -4,6 +4,7 @@ import "swiper/css";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { EffectCoverflow } from "swiper/modules";
 
+
 function Cards({ className = "" }) {
      const [movies, setMovies] = useState([]);
       const apikey = import.meta.env.VITE_API_KEY;
@@ -72,11 +73,9 @@ function Cards({ className = "" }) {
 
 
 
-<div className="w-full pl-20 font-mono text-3xl ">
-  <h1>TOP popular:</h1>
-</div>
-</div>
 
+  
+</div>
 
   )
 }
