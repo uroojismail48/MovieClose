@@ -3,6 +3,7 @@
 /* index.css ya global css mein */
 html, body {
   background-color: black;
+  overflow-x : hidden;
 }
 .circlemax{
    
@@ -56,4 +57,27 @@ transform : translate(-10%,70%);
 to{
     transform:translate(10%, -10%)
 }
+}
+@keyframes Scoller {
+    from{
+        transform: translateX(0)
+    }
+    to{
+         transform: translateX(-50%)
+    }
+}
+.scoll{
+    animation : Scoller 10s linear infinite;
+}
+.marquee-track{
+
+    animation: Scoller 20s linear infinite reverse ;
+}
+@keyframes marquee {
+    from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
 }
