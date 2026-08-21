@@ -5,6 +5,8 @@ import "swiper/css";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { Autoplay, FreeMode } from "swiper/modules";
 import HorrorCard from './HorrorCard';
+import Genres from './Genres';
+import Harrypotter from './Harrypotter';
 function Vd() {
          const [movies, setMovies] = useState([])
         const [now] = useState(() => Date.now())
@@ -162,9 +164,49 @@ text-transparent
 <div className="w-full h-1 bg-red-600 my-5">
 
 </div>
-<div className="h-screen w-full bg-black">
-   
+<div className="h-auto   w-full bg-black">
+   <Genres/>
 
+  <div className="h-50  mt-20  w-full flex justify-evenly ">
+    <img 
+    className="h-20 w-40 object-cover"
+    src="https://imgs.search.brave.com/_ZUHp45FODruCarsG44QY-p5TugaadTpd1NiZLVgSK8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nbWFydC5jb20v/ZmlsZXMvMjMvSGFy/cnktUG90dGVyLUxv/Z28tUE5HLUltYWdl/LnBuZw" alt="" />
+
+     <img 
+    className="h-20 w-60 object-cover"
+    src="https://imgs.search.brave.com/MQXKTGP_5ta_fjqZ7Gx6U_YWHJ-EaNolPSVTVShzLQc/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nYWxsLmNvbS93/cC1jb250ZW50L3Vw/bG9hZHMvMTMvQXZl/bmdlcnMtTG9nby1Q/TkctUGhvdG8ucG5n" alt="" />
+
+    <img 
+    className="h-20 w-40  object-cover"
+    src="https://imgs.search.brave.com/l6F0cHln7_2K1KlTU4-V_vqTyePKTq5vbIVZvTjonOs/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9zdGF0/aWMudmVjdGVlenku/Y29tL3N5c3RlbS9y/ZXNvdXJjZXMvcHJl/dmlld3MvMDI3LzEy/Ny80NTcvbm9uXzJ4/L3N0YXItd2Fycy1s/b2dvLXN0YXItd2Fy/cy1pY29uLXRyYW5z/cGFyZW50LWZyZWUt/cG5nLnBuZw" alt="" />
+   <img 
+    className="h-20 w-40  object-cover"
+    src="
+  
+  https://imgs.search.brave.com/p-j-b9PuBf7LdHPS5iIdYABmLXI6Fo87-TeDZvDjusE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/ZnJlZXBuZ2xvZ29z/LmNvbS91cGxvYWRz/L3N0cmFuZ2VyLXRo/aW5ncy1sb2dvLXBu/Zy9zdHJhbmdlci10/aGluZ3MtbW92aWUt/cHJlZGF0b3ItbG9n/by05LnBuZw
+  " alt="" />
+
+
+
+   </div>
+</div>
+<div className="h-screen w-full bg-black text-white  relative">
+        <div 
+
+className="flex justify-end 
+ items-center text-2xl font-sans  font-bold mb-10 ">
+
+        <h1 
+     
+        className="border border-blue-400 rounded-sm bg-blue-650 animate-pulse animate-ping 
+text-blue-400
+        p-2 px-4 "> Nostalgia!
+        </h1>
+       
+
+</div>
+ <div className="three  right-0 top-10 bg-blue-500 absolute"></div>
+<Harrypotter/>
 
 </div>
 </div>

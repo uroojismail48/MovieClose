@@ -1,5 +1,7 @@
 
+
 import Data from "./components/data";
+
 
 function App() {
 

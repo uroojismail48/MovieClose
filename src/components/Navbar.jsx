@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { RiSearchLine} from  "@remixicon/react";
+import { Link } from "react-router-dom";
 function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
 
@@ -25,12 +26,14 @@ text-white
 
         {/* Desktop links - hamesha dikhenge md+ pe */}
         <div className="hidden md:flex gap-10 font-bold text-lg">
-          <a href="">New Movie</a>
-          <a href="">Genre</a>
-          <a href="">Country</a>
-          <a href="">Movie</a>
-          <a href="">Series</a>
-          <span>|</span>
+          <Link to="/">Home</Link>
+          
+              <Link to="/newMovies">New-Movies</Link>
+          <Link to="/By-Country">By-Country</Link>
+          <Link to="/Series">Series</Link>
+         
+          
+         
 <RiSearchLine />
         </div>
       </div>
@@ -39,9 +42,12 @@ text-white
       <div className={`md:hidden 
         font-semibold
         absolute w-full  bg-black/50  flex flex-row gap-6 justify-center overflow-hidden transition-all duration-300 ${isOpen ? "max-h-60 py-4" : "max-h-0"}`}>
-        <a href="">news</a>
-        <a href="">Movies</a>
-        <a href="">Series</a>
+    <Link to="/">Home</Link>
+          
+              <Link to="/newMovies">New-Movies</Link>
+          <Link to="/By-Country">By-Country</Link>
+          <Link to="/Series">Series</Link>
+         
       </div>
     </div>
   );

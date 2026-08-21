@@ -26,7 +26,7 @@ function Main({movies}) {
         </div>
 <div className="swiper h-full w-full">
     <div className="swiper-wrapper" >
-        {movies.map((movie)=> (
+      {movies.map((movie)=> (
             
             <div className="swiper-slide bg-black w-full h-full relative " key={movie.id}>
                
