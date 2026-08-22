@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Main from "./Main";
-
+import Navbar from './Navbar'
 import NewMovies from "../pages/NewMovies";
 import AllGenres from "../pages/AllGenres";
 import { Route, Routes } from "react-router-dom";
@@ -23,8 +23,10 @@ function Data() {
   }, []);
 
   return (
-    <div className="w-full h-screen bg-black text-white">
-    
+    <div className="w-full h-screen bg-black text-white relative ">
+   <div className="absolute top-0 left-0 w-full z-50">
+         <Navbar className=""/>
+   </div>
   <Routes>
   <Route path="/" element={  <Main movies={movies} />}/>
     <Route path="/NewMovies" element={<NewMovies/>}/>

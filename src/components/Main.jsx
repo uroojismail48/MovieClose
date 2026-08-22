@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import Navbar from './Navbar'
+
 import Swiper from 'swiper';
 import { Autoplay } from 'swiper/modules'; 
 import Cards from './Cards'
@@ -22,7 +22,7 @@ function Main({movies}) {
   return (
     <div className="bg-black h-screen w-full relative ">
         <div className="w-full absolute top-0 left-0  z-9999">
-            <Navbar/>
+        
         </div>
 <div className="swiper h-full w-full">
     <div className="swiper-wrapper" >

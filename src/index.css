@@ -81,3 +81,17 @@ to{
     transform: translateX(0);
   }
 }
+
+.liner{
+animation-name: line;
+animation-duration: 3s;
+animation-timing-function: ease;
+}
+@keyframes line {
+    from{
+        transform: translateX(-100%)
+    }
+    to{
+        transform: translateX(0);
+    }
+}
