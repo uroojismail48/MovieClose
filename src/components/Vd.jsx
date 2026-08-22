@@ -7,6 +7,8 @@ import { Autoplay, FreeMode } from "swiper/modules";
 import HorrorCard from './HorrorCard';
 import Genres from './Genres';
 import Harrypotter from './Harrypotter';
+import StrangerThings from './StrangerThings';
+import Footer from './Footer';
 function Vd() {
          const [movies, setMovies] = useState([])
         const [now] = useState(() => Date.now())
@@ -167,7 +169,7 @@ text-transparent
 <div className="h-auto   w-full bg-black">
    <Genres/>
 
-  <div className="h-50  mt-20  w-full flex justify-evenly ">
+  <div className="h-20  mt-20  w-full flex justify-evenly ">
     <img 
     className="h-20 w-40 object-cover"
     src="https://imgs.search.brave.com/_ZUHp45FODruCarsG44QY-p5TugaadTpd1NiZLVgSK8/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly93d3cu/cG5nbWFydC5jb20v/ZmlsZXMvMjMvSGFy/cnktUG90dGVyLUxv/Z28tUE5HLUltYWdl/LnBuZw" alt="" />
@@ -207,7 +209,14 @@ text-blue-400
 </div>
  <div className="three  right-0 top-10 bg-blue-500 absolute"></div>
 <Harrypotter/>
+<StrangerThings/>
+<div className="w-full h-1 bg-red-600 my-5">
 
+</div>
+  <div className=" w-full z-50">
+         <Footer />
+   
+   </div>
 </div>
 </div>
 

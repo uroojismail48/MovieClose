@@ -5,6 +5,7 @@ import NewMovies from "../pages/NewMovies";
 import AllGenres from "../pages/AllGenres";
 import { Route, Routes } from "react-router-dom";
 import Series from "../pages/Series";
+import Footer from "./Footer";
 function Data() {
   const [movies, setMovies] = useState([]);
   const apikey = import.meta.env.VITE_API_KEY;
@@ -33,6 +34,7 @@ function Data() {
             <Route path="/By-Country" element={<AllGenres/>}/>
                   <Route path="/Series" element={<Series/>}/>
 </Routes>
+
     </div>
   );
 }

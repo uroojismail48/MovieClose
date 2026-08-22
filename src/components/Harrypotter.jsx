@@ -23,8 +23,9 @@ getHarryPotter()
 
  
     return (
-    <div className="w-full h-screen bg-black text-white  ">
-   <div className="relative   w-full h-100 overflow-x-hidden  flex justify-center  pointer-events-none
+    <div className="w-full h-110 bg-black text-white  ">
+   <div className="relative   
+   w-full h-100 overflow-x-hidden  flex justify-center  pointer-events-none
         items-center flex-1">
                 {movies.length > 0 && (
         <Swiper 
