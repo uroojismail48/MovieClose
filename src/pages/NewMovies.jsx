@@ -23,7 +23,7 @@ let oneMovie = movies.slice(0,2)[0]
 
         </div>
 
-    <div className="h-100 w-full mt-10">
+    {/* <div className="h-100 w-full mt-10">
   {oneMovie ? (
     <div className="w-full  max-w-xs">
       <img
@@ -37,8 +37,12 @@ let oneMovie = movies.slice(0,2)[0]
   ) : (
     <h1>Loading...</h1>
   )}
+</div> */}
+<div className="w-full h-screen border flex justify-center items-center px-4 ">
+     <h1
+     style={{WebkitTextStroke: "1px white"}}
+     className="font-bold text-7xl text-transparent">UPCOMING</h1>
 </div>
-   
         
      </div>
 

@@ -20,7 +20,7 @@ function StrangerThings() {
   }, []);
 
   return (
-    <div className="w-full h-screen mt-10 bg-black text-white">
+    <div className="w-full h-110 mt-10 bg-black text-white">
       <div className="relative w-full h-100 overflow-x-hidden flex justify-center items-center flex-1">
         {seasons.length > 0 && (
           <Swiper

@@ -7,6 +7,8 @@ import { Autoplay, FreeMode } from "swiper/modules";
 import HorrorCard from './HorrorCard';
 import Genres from './Genres';
 import Harrypotter from './Harrypotter';
+import laptop from '../assets/laptop.png'
+import mobile from '../assets/mobile.png'
 import StrangerThings from './StrangerThings';
 import Footer from './Footer';
 function Vd() {
@@ -210,6 +212,26 @@ text-blue-400
  <div className="three  right-0 top-10 bg-blue-500 absolute"></div>
 <Harrypotter/>
 <StrangerThings/>
+<div className="h-100 my-30
+font-mono relative
+w-full flex justify-center items-center">
+
+
+        <div className="">
+  <h1 className='font-bold  relative text-lg '>"Where every story finds its screen."</h1>
+        </div>
+<div className="flex  relative">
+        <img src={laptop}  className=''  alt="" />
+<img src={mobile} className='w-50 h-60  absolute bottom-0 ' alt="" />
+
+</div>
+<div className="">
+<h1 className='font-bold text-lg '>
+        "Popcorn's on you. The movies are on us."
+
+</h1>
+</div>
+</div>
 <div className="w-full h-1 bg-red-600 my-5">
 
 </div>
