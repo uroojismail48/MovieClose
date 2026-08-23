@@ -7,6 +7,7 @@ import "swiper/css";
 import Vd from './Vd';
 
 import {RiGooglePlayFill} from '@remixicon/react'
+import TrailerBtn from './TrailerBtn';
 function Main({movies}) {
     useEffect(()=> {
     new Swiper(".swiper", {
@@ -52,8 +53,7 @@ function Main({movies}) {
    </div>
 
 
-    <button className='border flex py-3 px-4 gap-3 rounded-md bg-white/20 cursor-pointer'>Watch Trailer <RiGooglePlayFill /></button>
-
+  <TrailerBtn  movieId={movie.id}  />
 
 
   </div>
