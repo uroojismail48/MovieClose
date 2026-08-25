@@ -41,7 +41,7 @@ function Genres() {
       {genres.slice(0, 6).map((genre) => (
         <div
           key={genre.id}
-          className="relative 
+          className="relative cursor-pointer 
           
           w-full border-b  hover:text-red-600 h-20
           transition-colors duration-200

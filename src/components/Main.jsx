@@ -6,7 +6,6 @@ import Cards from './Cards'
 import "swiper/css";
 import Vd from './Vd';
 
-import {RiGooglePlayFill} from '@remixicon/react'
 import TrailerBtn from './TrailerBtn';
 function Main({movies}) {
     useEffect(()=> {
@@ -29,7 +28,7 @@ function Main({movies}) {
     <div className="swiper-wrapper" >
       {movies.map((movie)=> (
             
-            <div className="swiper-slide bg-black w-full h-full relative " key={movie.id}>
+            <div className="swiper-slide bg-black w-full h-full relative cursor-pointer " key={movie.id}>
                
        <img
     className="h-full w-full object-cover"
