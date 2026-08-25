@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { RiSearchLine} from  "@remixicon/react";
+import { RiBookmarkFill} from  "@remixicon/react";
 import { Link } from "react-router-dom";
 
 
@@ -34,13 +34,13 @@ text-white
         <div className="hidden md:flex gap-10 font-bold text-lg">
           <Link to="/">Home</Link>
           
-              <Link to="/newMovies">Upcoming</Link>
-          <Link to="/By-Country">By-Country</Link>
+              <Link to="/newMovies">New</Link>
+          <Link to="/Genre">Genre</Link>
           <Link to="/Series">Series</Link>
          
           <span>|</span>
          
-<RiSearchLine />
+<RiBookmarkFill/>
         </div>
       </div>
 
@@ -50,8 +50,8 @@ text-white
         absolute w-full  bg-black/50  flex flex-row gap-6 justify-center overflow-hidden transition-all duration-300 ${isOpen ? "max-h-60 py-4" : "max-h-0"}`}>
     <Link to="/">Home</Link>
           
-              <Link to="/newMovies">Upcoming</Link>
-          <Link to="/By-Country">By-Country</Link>
+              <Link to="/newMovies">New</Link>
+          <Link to="/Genre">Genre</Link>
           <Link to="/Series">Series</Link>
          
       </div>
