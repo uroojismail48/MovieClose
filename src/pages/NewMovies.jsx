@@ -1,6 +1,7 @@
 import { RiArrowLeftLine, RiArrowRightLine,  RiBookmarkLine, RiSearchLine } from "@remixicon/react";
 import {RiBookmarkFill  as Filled} from "@remixicon/react"
 import { useEffect, useState } from "react";
+import TrailerBtn from "../components/TrailerBtn";
 function NewMovies() {
   const [page, setPage] = useState(1)
   const [movies, setMovies] = useState([]);
@@ -9,7 +10,7 @@ function NewMovies() {
 const [searchQuery, setSearchQuery] = useState("")
 const [bookmarked, setBookmarked] = useState(() => {
   const saved = localStorage.getItem("bookmarkedMovies")
-    console.log(saved);
+ 
   return saved ? JSON.parse(saved) : []
 
   
@@ -19,10 +20,10 @@ const [selectedGenre, setSelectedGenre] = useState("")
   async function fetchUpcoming() {
     let url ;
       if(searchQuery !==  ""){
-          url =  `https://api.themoviedb.org/3/search/movie/upcoming?api_key=${apikey}&query=${searchQuery}&language=en-US&page=${page}`
+          url =  `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${searchQuery}&language=en-US&page=${page}`
  
       }else if (selectedGenre !== "" ){
-url =   `https://api.themoviedb.org/3/discover/movie?/upcoming?api_key=${apikey}&with_genres=${selectedGenre}&sort_by=popularity.desc&page=${page}`
+url =   `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&with_genres=${selectedGenre}&sort_by=popularity.desc&page=${page}`
     ;
       }else{
    url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=${page}`
@@ -71,13 +72,13 @@ setSearchQuery("")
 setPage(1)
 }
 
-function ToggleBookmarked(movieId){
+function ToggleBookmarked(movie){
 setBookmarked((prev)=> {
-  const exists = prev.includes(movieId)
+  const exists = prev.some((m) => m.id === movie.id)
   if(exists){
-    return prev.filter((id) => id !== movieId)
+    return prev.filter((m) => m.id !== movie.id)
   }else{
-    return [...prev, movieId]
+    return [...prev, movie]
   }
 })
 }
@@ -159,25 +160,36 @@ Genre
 <div className="w-full flex flex-wrap 
 gap-4 px-4 justify-center items-center  ">
    {movies.map((movie)=> (
-<div className="w-60 h-80 rounded-md relative" key={movie.id}>
+<div className="group w-60 h-80 rounded-md relative " key={movie.id}>
+  
        <img
                 className="h-full w-full absolute object-cover "
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
               />
-              <div className="absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
+              <div className=" absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
+            
+  <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+<TrailerBtn movieId={movie.id} style={{ fontSize:"14px ",  }}/>
+  </div>
               <h1 className="absolute 
               backdrop-blur-[2px] text-bold
               ">{movie.title}</h1>
              <div className="">
+            
             <button className="transition-transform duration-250" onClick={()=> ToggleBookmarked(movie)}> 
               {
                 bookmarked.some((m) => m.id === movie.id) ? (
-                  <Filled size={30} className="text-red-600 absolute right-0 top-0 animate-pulse " /> 
+                  <Filled size={30} className="
+                  z-[999]
+                  text-red-600 absolute right-0 top-0 animate-pulse " /> 
                 ) : (
- <RiBookmarkLine size={30} className="text-white absolute right-0 top-0 " />
+ <RiBookmarkLine size={30} className="
+ z-[9999]
+ text-white absolute right-0 top-0 " />
                 )
               }
+              
           
            </button>
                   <h1  className='absolute bottom-0 right-0 font-bold'>{movie.original_language}</h1>

@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 import "swiper/css";
 import { SwiperSlide, Swiper } from "swiper/react";
 import { EffectCoverflow } from "swiper/modules";
+import TrailerBtn from "./TrailerBtn";
 
 
 function Cards({ className = "" }) {
@@ -14,7 +15,7 @@ function Cards({ className = "" }) {
           `https://api.themoviedb.org/3/movie/popular?api_key=${apikey}&language=en-US&page=2`
         );
         const data = await res.json();
-        console.log(data);
+      
         setMovies(data.results);
       }
     
@@ -51,14 +52,16 @@ function Cards({ className = "" }) {
   {movies.map((movie) => (
     <SwiperSlide
       key={movie.id}
-      className="!w-[300px]  rounded-2xl overflow-hidden "
+      className="!w-[300px]  rounded-2xl overflow-hidden relative group"
     >
       <img
         className="h-full w-full object-cover "
   src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
         alt={movie.title}
       />
-
+        <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+        <TrailerBtn movieId={movie.id} style={{ fontSize:"14px ",  }}/>
+          </div>
       <div className="absolute bottom-2 left-1/2 -translate-x-1/2
      
       px-4 border  border-white/60 backdrop-blur-[2px] text-bold rounded-md ">

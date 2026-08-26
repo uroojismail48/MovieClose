@@ -11,6 +11,7 @@ import laptop from '../assets/laptop.png'
 import mobile from '../assets/mobile.png'
 import StrangerThings from './StrangerThings';
 import Footer from './Footer';
+
 function Vd() {
          const [movies, setMovies] = useState([])
         const [now] = useState(() => Date.now())
@@ -115,7 +116,7 @@ className="w-full h-full  absolute"
 
 >
         {movies.map((movie) => (
-<SwiperSlide className='  h-[60px]
+<SwiperSlide className='  h-[60px] 
  !w-[300px] flex shrink-0 justify-center items-center' key={movie.id}>
       <img
         className="h-full w-full object-cover "
@@ -128,6 +129,7 @@ className="w-full h-full  absolute"
       px-4 border 
       
       border-white/60 backdrop-blur-[2px] text-bold rounded-md ">
+  
         <h1>{movie.title}</h1>
        
       </div>
