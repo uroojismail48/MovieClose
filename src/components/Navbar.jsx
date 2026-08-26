@@ -39,8 +39,8 @@ text-white
           <Link to="/Series">Series</Link>
          
           <span>|</span>
-         
-<RiBookmarkFill/>
+            <Link to="/Wishlists"><RiBookmarkFill  /></Link>
+
         </div>
       </div>
 

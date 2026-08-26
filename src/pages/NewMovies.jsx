@@ -7,16 +7,22 @@ function NewMovies() {
   const [totalPages, setTotalPages] = useState(1);
   const apikey = import.meta.env.VITE_API_KEY;
 const [searchQuery, setSearchQuery] = useState("")
-const [bookmarked, setBookmarked] = useState([])
+const [bookmarked, setBookmarked] = useState(() => {
+  const saved = localStorage.getItem("bookmarkedMovies")
+    console.log(saved);
+  return saved ? JSON.parse(saved) : []
+
+  
+})
  const [now] = useState(() => Date.now())
 const [selectedGenre, setSelectedGenre] = useState("")
   async function fetchUpcoming() {
     let url ;
       if(searchQuery !==  ""){
-          url =  `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${searchQuery}&language=en-US&page=${page}`
+          url =  `https://api.themoviedb.org/3/search/movie/upcoming?api_key=${apikey}&query=${searchQuery}&language=en-US&page=${page}`
  
       }else if (selectedGenre !== "" ){
-url =   `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&with_genres=${selectedGenre}&sort_by=popularity.desc&page=${page}`
+url =   `https://api.themoviedb.org/3/discover/movie?/upcoming?api_key=${apikey}&with_genres=${selectedGenre}&sort_by=popularity.desc&page=${page}`
     ;
       }else{
    url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=${page}`
@@ -25,7 +31,7 @@ url =   `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&with_genr
    
     const res = await fetch(url);
     const data = await res.json()
-    console.log(data.results);
+   
     setMovies(data.results);
     setTotalPages(data.total_pages);
   }
@@ -34,7 +40,10 @@ url =   `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&with_genr
     // eslint-disable-next-line react-hooks/set-state-in-effect
     fetchUpcoming();
     window.scrollTo(0,0)
-  }, [page,searchQuery, selectedGenre]);
+
+   localStorage.setItem("bookmarkedMovies", JSON.stringify(bookmarked));
+  }, [page,searchQuery, selectedGenre, bookmarked]);
+
 
   
 function nextPage(){
@@ -62,9 +71,15 @@ setSearchQuery("")
 setPage(1)
 }
 
-function ToggleBookmarked(moviesId){
-setBookmarked((prev)=> prev.includes(moviesId) ? prev.filter((id) => id !== moviesId) : [...prev, moviesId])
-
+function ToggleBookmarked(movieId){
+setBookmarked((prev)=> {
+  const exists = prev.includes(movieId)
+  if(exists){
+    return prev.filter((id) => id !== movieId)
+  }else{
+    return [...prev, movieId]
+  }
+})
 }
 
   return (
@@ -155,9 +170,9 @@ gap-4 px-4 justify-center items-center  ">
               backdrop-blur-[2px] text-bold
               ">{movie.title}</h1>
              <div className="">
-            <button className="transition-transform duration-250" onClick={()=> ToggleBookmarked(movie.id)}> 
+            <button className="transition-transform duration-250" onClick={()=> ToggleBookmarked(movie)}> 
               {
-                bookmarked.includes(movie.id) ? (
+                bookmarked.some((m) => m.id === movie.id) ? (
                   <Filled size={30} className="text-red-600 absolute right-0 top-0 animate-pulse " /> 
                 ) : (
  <RiBookmarkLine size={30} className="text-white absolute right-0 top-0 " />
