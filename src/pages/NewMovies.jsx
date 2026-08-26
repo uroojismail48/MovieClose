@@ -8,6 +8,7 @@ function NewMovies() {
   const apikey = import.meta.env.VITE_API_KEY;
 const [searchQuery, setSearchQuery] = useState("")
 const [bookmarked, setBookmarked] = useState([])
+ const [now] = useState(() => Date.now())
 const [selectedGenre, setSelectedGenre] = useState("")
   async function fetchUpcoming() {
     let url ;
@@ -72,12 +73,34 @@ setBookmarked((prev)=> prev.includes(moviesId) ? prev.filter((id) => id !== movi
 
         </div>
 
-<div className=" flex gap-20 flex-col h-85 w-full relative">
+<div className=" flex gap-20  flex-col h-150 w-full relative">
 <div className="w-full mt-20 flex justify-center items-center px-4 flex-col ">
-  <div className=" ">  
+  <div className=" flex flex-col justify-center items-center  ">  
      <h1
      style={{WebkitTextStroke: "1px white"}}
-     className="font-bold text-7xl text-transparent">New Coming</h1>
+     className="font-bold text-7xl text-transparent">What's New Coming</h1>
+       <div className="w-full flex mt-10 font-bold text-2xl uppercase 
+    overflow-hidden
+    
+    gap-10 justify-center items-center text-center" >
+<div className="w-full flex gap-20">
+       <h1>"Coming</h1>
+ 
+            <h1>soon</h1>
+            
+ <h1>   to</h1>
+     
+ <h1> screen</h1>
+
+ <h1> Stream </h1>
+        
+ <h1>near</h1>
+     <h1> you."</h1>
+      
+   
+  </div>
+  
+</div>
      </div>
 
 </div>
@@ -96,19 +119,25 @@ relative
 
 </label>
 <select name="Genre" onChange={handleGenre} value={selectedGenre}
-className="text-white border w-60 p-5 rounded-md scroller-none"
+className="text-white border border-red-400 w-50 p-4 rounded-md scroller-none bg-red-600 
+flex flex-col justify-center items-center font-bold text-lg text-center
+"
 id="">
 Genre
-<option  className="text-black font-bold text-lg"  value="">All Genres</option>
-<option className="text-black font-bold text-lg" value="27">Horror</option>
-<option className="text-black font-bold text-lg"  value="12">Adventure</option>
-<option className="text-black font-bold text-lg"  value="80">Crime</option>
-<option className="text-black font-bold text-lg"  value="99">Documentary</option>
-<option className="text-black font-bold text-lg"  value="35">Comedy</option>
-<option className="text-black font-bold text-lg"  value="16">Animation</option>
+<option  className="font-bold text-lg bg-black "  value="">All Genres</option>
+<option  className="font-bold text-lg bg-black " value="27">Horror</option>
+<option   className="font-bold text-lg bg-black"value="12">Adventure</option>
+<option   className="font-bold text-lg bg-black"  value="80">Crime</option>
+<option  className="font-bold text-lg bg-black "  value="99">Documentary</option>
+<option   className="font-bold text-lg bg-black"  value="35">Comedy</option>
+<option  className="font-bold text-lg bg-black" value="16">Animation</option>
 </select>
 </div>
-<div className=""><h1 className="absolute right-0 top-75 right-40">Total Pages : <span className="text-gray-400">{totalPages}</span></h1>
+<div className=""><h1 className="absolute left-30 top-120 font-semibold text-[20px] ">
+  <span className="font-bold">RESULTS : </span>
+  Total Pages : <span className="text-gray-400">{totalPages}</span></h1>
+      
+
 </div>
 
        </div> 
@@ -125,17 +154,24 @@ gap-4 px-4 justify-center items-center  ">
               <h1 className="absolute 
               backdrop-blur-[2px] text-bold
               ">{movie.title}</h1>
-             <div className="active:scale-y-35 transition-transform duration-250">
-            <button onClick={()=> ToggleBookmarked(movie.id)}> 
+             <div className="">
+            <button className="transition-transform duration-250" onClick={()=> ToggleBookmarked(movie.id)}> 
               {
                 bookmarked.includes(movie.id) ? (
-                  <Filled size={30} className="text-yellow-400 absolute right-0 top-0 animate-pulse " /> 
+                  <Filled size={30} className="text-red-600 absolute right-0 top-0 animate-pulse " /> 
                 ) : (
  <RiBookmarkLine size={30} className="text-white absolute right-0 top-0 " />
                 )
               }
           
            </button>
+                  <h1  className='absolute bottom-0 right-0 font-bold'>{movie.original_language}</h1>
+        {now < new Date( movie.release_date).getTime() ? (
+
+            <h1  className='absolute bottom-0 left-0 font-bold'>Coming Soon : {movie.release_date}</h1>
+       ): (
+ <h1  className='absolute bottom-0 left-0 font-bold'>Released</h1>
+       ) }
              </div>
 
 </div>

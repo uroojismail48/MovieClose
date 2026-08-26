@@ -19,7 +19,7 @@ function Vd() {
           const data = await fetch(     `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&with_companies=420&language=en-US&sort_by=popularity.desc`)
           const res =  await data.json()
          setMovies(res.results)
-        console.log(res.results);
+     
         
         }
         useEffect(()=> 

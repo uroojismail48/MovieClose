@@ -13,9 +13,9 @@ function Navbar({className = ""}) {
   const [isOpen, setIsOpen] = useState(false);
   return (
     <div className={`w-full font-mono ${className} px-20 `}>
-      <div className="flex  rounded-md justify-between items-center px-4 py-3">
+      <div className="flex  rounded-md justify-between items-center px-4 py-4">
      <div className="">
-         <h1 className="font-bold font-mono justify-center text-2xl flex items-center text-red-700 text-center">
+         <h1 className="font-bold  justify-center text-4xl flex items-center text-red-700 text-center">
           <span className=" 
 text-white         
          rounded-md text-center">
