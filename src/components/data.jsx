@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Main from "./Main";
 import Navbar from './Navbar'
 import NewMovies from "../pages/NewMovies";
-import AllGenres from "../pages/AllGenres";
+import AllGenres from "../pages/AllGenres"
 import { Route, Routes } from "react-router-dom";
 import Series from "../pages/Series";
 // import Footer from "./Footer";
@@ -34,7 +34,8 @@ function Data() {
   <Routes>
   <Route path="/" element={  <Main movies={movies} />}/>
     <Route path="/NewMovies" element={<NewMovies/>}/>
-            <Route path="/By-Country" element={<AllGenres/>}/>
+            <Route path="/Genre" element={<AllGenres/>}/>
+            
                   <Route path="/Series" element={<Series/>}/>
                   <Route path="/Wishlists" element={<WishList/>}/>
 
