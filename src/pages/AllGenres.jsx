@@ -1,6 +1,7 @@
 import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
 import { useEffect, useState } from "react";
 import Bookedmarked from "../components/Bookedmarked";
+import TrailerBtn from "../components/TrailerBtn";
 
 function AllGenres() {
   const apikey = import.meta.env.VITE_API_KEY;
@@ -174,7 +175,7 @@ function AllGenres() {
       {/* Movie Grid */}
       <div className="w-full flex flex-wrap gap-4 px-4 justify-center items-center">
         {movies.map((movie) => (
-          <div className="w-60 h-80 rounded-md relative" key={movie.id}>
+          <div className="group w-60 h-80 rounded-md relative" key={movie.id}>
             <img
               className="h-full w-full absolute object-cover rounded-md"
               src={
@@ -185,6 +186,9 @@ function AllGenres() {
               alt={movie.title}
             />
             <div className="absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
+          <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+        <TrailerBtn movieId={movie.id} style={{ fontSize:"14px ",  }}/>
+          </div>
             <h1 className="absolute backdrop-blur-[2px] text-bold">
               {movie.title}
             </h1>

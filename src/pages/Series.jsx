@@ -1,6 +1,7 @@
 import { RiArrowLeftLine, RiArrowRightLine, RiSearchLine } from "@remixicon/react";
 import { useEffect, useState } from "react";
 import Bookedmarked from "../components/Bookedmarked";
+import TrailerBtn from "../components/TrailerBtn";
 
 function Series() {
   const apikey = import.meta.env.VITE_API_KEY;
@@ -140,7 +141,9 @@ function Series() {
               alt={serie.name}
             />
             <div className="absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
-
+  <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
+<TrailerBtn movieId={serie.id} style={{ fontSize:"14px ",  }}/>
+  </div>
             <h1 className="absolute backdrop-blur-[2px] text-bold">
               {serie.name}
             </h1>
