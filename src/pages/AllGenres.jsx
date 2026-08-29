@@ -1,5 +1,6 @@
 import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
 import { useEffect, useState } from "react";
+import Bookedmarked from "../components/Bookedmarked";
 
 function AllGenres() {
   const apikey = import.meta.env.VITE_API_KEY;
@@ -187,6 +188,7 @@ function AllGenres() {
             <h1 className="absolute backdrop-blur-[2px] text-bold">
               {movie.title}
             </h1>
+                  <Bookedmarked items={movie}/>
             <h1 className="absolute bottom-0 right-0 font-bold">
               {movie.original_language}
             </h1>

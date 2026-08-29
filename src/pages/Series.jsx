@@ -1,5 +1,6 @@
 import { RiArrowLeftLine, RiArrowRightLine, RiSearchLine } from "@remixicon/react";
 import { useEffect, useState } from "react";
+import Bookedmarked from "../components/Bookedmarked";
 
 function Series() {
   const apikey = import.meta.env.VITE_API_KEY;
@@ -143,7 +144,7 @@ function Series() {
             <h1 className="absolute backdrop-blur-[2px] text-bold">
               {serie.name}
             </h1>
-
+      <Bookedmarked items={serie}/>
             <div className="">
               <h1 className="absolute bottom-0 right-0 font-bold">
                 {serie.original_language}

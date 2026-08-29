@@ -1,19 +1,13 @@
-import { useEffect, useState } from "react";
+
 import { RiBookmarkFill } from "@remixicon/react";
+import { useDispatch, useSelector } from "react-redux";
+import { toggleBookmark } from "../redux/BookmarkSlice";
 
 function Wishlist() {
-  const [bookmarked, setBookmarked] = useState([]);
+ const dispatch =  useDispatch()
+const bookmarked = useSelector((state) =>  state.bookmark.bookmarked)
 
-  useEffect(() => {
-    const saved = localStorage.getItem("bookmarkedMovies");
-    setBookmarked(saved ? JSON.parse(saved) : []);
-  }, []);
 
-  function removeBookmark(movieId) {
-    const updated = bookmarked.filter((m) => m.id !== movieId);
-    setBookmarked(updated);
-    localStorage.setItem("bookmarkedMovies", JSON.stringify(updated));
-  }
 
   return (
     <div className="w-full min-h-screen bg-black text-white p-6 ">
@@ -35,7 +29,7 @@ function Wishlist() {
               <h1 className="absolute backdrop-blur-[2px]">{movie.title}</h1>
 
               <button
-                onClick={() => removeBookmark(movie.id)}
+                onClick={() => dispatch(toggleBookmark(movie))}
                 className="absolute right-0 top-0"
               >
                 <RiBookmarkFill size={30} className="text-red-600" />

@@ -1,20 +1,15 @@
-import { RiArrowLeftLine, RiArrowRightLine,  RiBookmarkLine, RiSearchLine } from "@remixicon/react";
-import {RiBookmarkFill  as Filled} from "@remixicon/react"
+import { RiArrowLeftLine, RiArrowRightLine, RiSearchLine } from "@remixicon/react";
+
 import { useEffect, useState } from "react";
 import TrailerBtn from "../components/TrailerBtn";
+import Bookedmarked from "../components/Bookedmarked";
 function NewMovies() {
   const [page, setPage] = useState(1)
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
   const apikey = import.meta.env.VITE_API_KEY;
 const [searchQuery, setSearchQuery] = useState("")
-const [bookmarked, setBookmarked] = useState(() => {
-  const saved = localStorage.getItem("bookmarkedMovies")
- 
-  return saved ? JSON.parse(saved) : []
 
-  
-})
  const [now] = useState(() => Date.now())
 const [selectedGenre, setSelectedGenre] = useState("")
   async function fetchUpcoming() {
@@ -36,14 +31,14 @@ url =   `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&with_genr
     setMovies(data.results);
     setTotalPages(data.total_pages);
   }
-// let oneMovie = movies.slice(0,2)[0]
+
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
+
     fetchUpcoming();
     window.scrollTo(0,0)
 
-   localStorage.setItem("bookmarkedMovies", JSON.stringify(bookmarked));
-  }, [page,searchQuery, selectedGenre, bookmarked]);
+ 
+  }, [page,searchQuery, selectedGenre]);
 
 
   
@@ -72,16 +67,7 @@ setSearchQuery("")
 setPage(1)
 }
 
-function ToggleBookmarked(movie){
-setBookmarked((prev)=> {
-  const exists = prev.some((m) => m.id === movie.id)
-  if(exists){
-    return prev.filter((m) => m.id !== movie.id)
-  }else{
-    return [...prev, movie]
-  }
-})
-}
+
 
   return (
     <div className="bg-black h-screen w-full absolute text-white ">
@@ -177,21 +163,7 @@ gap-4 px-4 justify-center items-center  ">
               ">{movie.title}</h1>
              <div className="">
             
-            <button className="transition-transform duration-250" onClick={()=> ToggleBookmarked(movie)}> 
-              {
-                bookmarked.some((m) => m.id === movie.id) ? (
-                  <Filled size={30} className="
-                  z-[999]
-                  text-red-600 absolute right-0 top-0 animate-pulse " /> 
-                ) : (
- <RiBookmarkLine size={30} className="
- z-[9999]
- text-white absolute right-0 top-0 " />
-                )
-              }
-              
-          
-           </button>
+      <Bookedmarked items={movie}/>
                   <h1  className='absolute bottom-0 right-0 font-bold'>{movie.original_language}</h1>
         {now < new Date( movie.release_date).getTime() ? (
 
