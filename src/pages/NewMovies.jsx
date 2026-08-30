@@ -1,47 +1,44 @@
 import { RiArrowLeftLine, RiArrowRightLine, RiSearchLine } from "@remixicon/react";
 
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import TrailerBtn from "../components/TrailerBtn";
 import Bookedmarked from "../components/Bookedmarked";
+import {
+  useGetUpcomingMoviesQuery,
+  useSearchMoviesQuery,
+  useGetMoviesByGenreQuery,
+} from "../redux/FetchMovie";
 function NewMovies() {
   const [page, setPage] = useState(1)
-  const [movies, setMovies] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
-  const apikey = import.meta.env.VITE_API_KEY;
-const [searchQuery, setSearchQuery] = useState("")
+const { data, isLoading, isError } = useGetUpcomingMoviesQuery({ page });
+const  movies = data?.results || []
+
+ const [searchQuery, setSearchQuery] = useState("");
+  const [selectedGenre, setSelectedGenre] = useState("");
+const totalPages = data?.total_pages || 1
 
  const [now] = useState(() => Date.now())
-const [selectedGenre, setSelectedGenre] = useState("")
-  async function fetchUpcoming() {
-    let url ;
-      if(searchQuery !==  ""){
-          url =  `https://api.themoviedb.org/3/search/movie?api_key=${apikey}&query=${searchQuery}&language=en-US&page=${page}`
- 
-      }else if (selectedGenre !== "" ){
-url =   `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&with_genres=${selectedGenre}&sort_by=popularity.desc&page=${page}`
-    ;
-      }else{
-   url = `https://api.themoviedb.org/3/movie/upcoming?api_key=${apikey}&language=en-US&page=${page}`
-    ;
-      }
-   
-    const res = await fetch(url);
-    const data = await res.json()
-   
-    setMovies(data.results);
-    setTotalPages(data.total_pages);
-  }
 
-  useEffect(() => {
+  const upcomingResult = useGetUpcomingMoviesQuery(
+    { page },
+    { skip: searchQuery !== "" || selectedGenre !== "" }
+  );
 
-    fetchUpcoming();
-    window.scrollTo(0,0)
+  const searchResult = useSearchMoviesQuery(
+    { query: searchQuery, page },
+    { skip: searchQuery === "" }
+  );
 
- 
-  }, [page,searchQuery, selectedGenre]);
+  const genreResult = useGetMoviesByGenreQuery(
+    { genreId: selectedGenre, page },
+    { skip: selectedGenre === "" }
+  );
 
-
-  
+    const activeResult = searchQuery
+    ? searchResult
+    : selectedGenre
+    ? genreResult
+    : upcomingResult;
 function nextPage(){
   if(page<totalPages)
   {
@@ -67,6 +64,8 @@ setSearchQuery("")
 setPage(1)
 }
 
+  if (isLoading) return <p className="text-white">Loading...</p>;
+  if (isError) return <p className="text-white">Something went wrong.</p>;
 
 
   return (
