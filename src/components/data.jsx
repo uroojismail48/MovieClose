@@ -5,8 +5,9 @@ import NewMovies from "../pages/NewMovies";
 import AllGenres from "../pages/AllGenres"
 import { Route, Routes } from "react-router-dom";
 import Series from "../pages/Series";
-// import Footer from "./Footer";
+
 import WishList from "../pages/WishList";
+import DetailedPage from "../pages/Detailedpage";
 
 
 function Data() {
@@ -18,7 +19,7 @@ function Data() {
       `https://api.themoviedb.org/3/movie/popular?api_key=${apikey}&language=en-US&page=1`
     );
     const data = await res.json();
-    console.log(data);
+    
     setMovies(data.results);
   }
 
@@ -38,6 +39,7 @@ function Data() {
             
                   <Route path="/Series" element={<Series/>}/>
                   <Route path="/Wishlists" element={<WishList/>}/>
+      <Route path="/movie/:movieId" element={<DetailedPage/>}/>
 
 </Routes>
 

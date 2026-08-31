@@ -89,7 +89,7 @@ function AllGenres() {
           Explore
         </h1>
 
-        {/* Tabs */}
+    
         <div className="flex gap-4 mb-8">
           <button
             onClick={() => switchTab("genre")}
@@ -117,7 +117,7 @@ function AllGenres() {
           </button>
         </div>
 
-        {/* Sub-filter (genre pills / country dropdown) */}
+   
         {activeTab === "genre" && (
           <div className="flex flex-wrap gap-3 justify-center mb-10 max-w-4xl">
             {genres.map((g) => (

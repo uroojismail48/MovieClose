@@ -8,16 +8,13 @@ import {
   useSearchMoviesQuery,
   useGetMoviesByGenreQuery,
 } from "../redux/FetchMovie";
-function NewMovies() {
-  const [page, setPage] = useState(1)
-const { data, isLoading, isError } = useGetUpcomingMoviesQuery({ page });
-const  movies = data?.results || []
+import { Link } from "react-router-dom";
 
- const [searchQuery, setSearchQuery] = useState("");
+  function NewMovies() {
+  const [page, setPage] = useState(1);
+  const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
-const totalPages = data?.total_pages || 1
-
- const [now] = useState(() => Date.now())
+  const [now] = useState(() => Date.now());
 
   const upcomingResult = useGetUpcomingMoviesQuery(
     { page },
@@ -34,45 +31,57 @@ const totalPages = data?.total_pages || 1
     { skip: selectedGenre === "" }
   );
 
-    const activeResult = searchQuery
+  const activeResult = searchQuery
     ? searchResult
     : selectedGenre
     ? genreResult
     : upcomingResult;
-function nextPage(){
-  if(page<totalPages)
-  {
-setPage(page + 1)
-  }
-}
 
-  function prevPage(){
-  if(page > 1)
-  {
-setPage(page - 1)
-  }
-  
-}
-function handleSearchChange(e){
-setSearchQuery(e.target.value)
-  setSelectedGenre("")  
-setPage(1)
-}
-function handleGenre(e){
-  setSelectedGenre(e.target.value)
-setSearchQuery("")
-setPage(1)
-}
+  const { data, isLoading, isError } = activeResult;
+  const movies = data?.results || [];
+  const totalPages = data?.total_pages || 1;
 
-  if (isLoading) return <p className="text-white">Loading...</p>;
-  if (isError) return <p className="text-white">Something went wrong.</p>;
+  function nextPage() {
+    if (page < totalPages) setPage(page + 1);
+  }
+
+  function prevPage() {
+    if (page > 1) setPage(page - 1);
+  }
+
+  function handleSearchChange(e) {
+    setSearchQuery(e.target.value);
+    setSelectedGenre("");
+    setPage(1);
+  }
+
+  function handleGenre(e) {
+    setSelectedGenre(e.target.value);
+    setSearchQuery("");
+    setPage(1);
+  }
+
+  if (isError)
+    return (
+      <div className="w-full h-screen bg-black flex flex-col items-center justify-center gap-4">
+        <p className="text-red-600 text-3xl">Something went wrong.</p>
+        <button className="bg-red-600 text-white text-lg px-6 py-3 rounded-md">
+          Go Back
+        </button>
+      </div>
+    );
+
 
 
   return (
     <div className="bg-black h-screen w-full absolute text-white ">
-        <div className="liner w-full h-1 bg-red-600 mt-20">
+  {isLoading ? (
+ <div className="liner w-full h-1 bg-orange-600 mt-20  animate-ping"></div>
+  ): (
+     <div className="liner w-full h-1 bg-red-600 mt-20"></div>
+  )
+}
 
-        </div>
 
 <div className=" flex gap-20  flex-col h-150 w-full relative">
 <div className="w-full mt-20 flex justify-center items-center px-4 flex-col ">
@@ -146,12 +155,13 @@ Genre
 gap-4 px-4 justify-center items-center  ">
    {movies.map((movie)=> (
 <div className="group w-60 h-80 rounded-md relative " key={movie.id}>
-  
+  <Link to={`/movie/${movie.id}`}>
        <img
                 className="h-full w-full absolute object-cover "
           src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
                 alt={movie.title}
               />
+              </Link>
               <div className=" absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
             
   <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">

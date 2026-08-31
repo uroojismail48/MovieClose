@@ -17,6 +17,7 @@ return (
         <RiBookmarkLine size={size} className="text-white absolute right-0 top-0" />
       ) }
 </button>
+
     </div>
   )
 }
