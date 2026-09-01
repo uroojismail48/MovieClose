@@ -1,7 +1,7 @@
 import { RiArrowLeftLine, RiArrowRightLine, RiSearchLine } from "@remixicon/react";
 
 import { useState } from "react";
-import TrailerBtn from "../components/TrailerBtn";
+
 import Bookedmarked from "../components/Bookedmarked";
 import {
   useGetUpcomingMoviesQuery,
@@ -152,38 +152,42 @@ Genre
 
        </div> 
 <div className="w-full flex flex-wrap 
-gap-4 px-4 justify-center items-center  ">
-   {movies.map((movie)=> (
-<div className="group w-60 h-80 rounded-md relative " key={movie.id}>
-  <Link to={`/movie/${movie.id}`}>
-       <img
-                className="h-full w-full absolute object-cover "
-          src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
-                alt={movie.title}
-              />
-              </Link>
-              <div className=" absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
-            
-  <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center">
-<TrailerBtn movieId={movie.id} style={{ fontSize:"14px ",  }}/>
+gap-14 px-10 justify-center items-center  ">
+{movies.map((movie) => (
+  <div className="group w-60 h-80 rounded-md relative" key={movie.id}>
+    <Link to={`/movie/${movie.id}`} className="absolute inset-0 z-0">
+      <img
+        className="h-full w-full object-cover"
+        src={`https://image.tmdb.org/t/p/w500${movie.poster_path}`}
+        alt={movie.title}
+      />
+      <div className="absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
+      <h1 className="absolute backdrop-blur-[2px] text-bold">{movie.title}</h1>
+    </Link>
+
+ 
+    <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center z-10 pointer-events-none group-hover:pointer-events-auto">
+      <Link
+        to={`/movie/${movie.id}`}
+        className="border flex py-3 px-4 gap-3 rounded-md bg-white/20 cursor-pointer font-bold hover:bg-white hover:text-black transition"
+      >
+        View Description
+      </Link>
+    </div>
+
+    <div className="z-10 relative ">
+      <Bookedmarked items={movie} />
+      <h1 className="absolute top-50 right-0 font-bold">{movie.original_language}</h1>
+      {now < new Date(movie.release_date).getTime() ? (
+        <h1 className="absolute bottom-0 left-0 font-bold">
+          Coming Soon : {movie.release_date}
+        </h1>
+      ) : (
+        <h1 className="absolute bottom-0 left-0 font-bold">Released</h1>
+      )}
+    </div>
   </div>
-              <h1 className="absolute 
-              backdrop-blur-[2px] text-bold
-              ">{movie.title}</h1>
-             <div className="">
-            
-      <Bookedmarked items={movie}/>
-                  <h1  className='absolute bottom-0 right-0 font-bold'>{movie.original_language}</h1>
-        {now < new Date( movie.release_date).getTime() ? (
-
-            <h1  className='absolute bottom-0 left-0 font-bold'>Coming Soon : {movie.release_date}</h1>
-       ): (
- <h1  className='absolute bottom-0 left-0 font-bold'>Released</h1>
-       ) }
-             </div>
-
-</div>
- ))}
+))}
 
 </div>
 <div className="w-full p-6  flex gap-10 justify-center items-center bg-black font-bold">
