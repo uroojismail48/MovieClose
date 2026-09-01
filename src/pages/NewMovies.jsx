@@ -63,7 +63,7 @@ import { Link } from "react-router-dom";
 
   if (isError)
     return (
-      <div className="w-full h-screen bg-black flex flex-col items-center justify-center gap-4">
+      <div className="w-full h-screen bg-black flex flex-col items-center justify-center gap-10">
         <p className="text-red-600 text-3xl">Something went wrong.</p>
         <button className="bg-red-600 text-white text-lg px-6 py-3 rounded-md">
           Go Back

@@ -3,24 +3,27 @@ import { useEffect, useState } from "react";
 import Bookedmarked from "../components/Bookedmarked";
 
 function DetailedPage() {
+      const [ isLoading, setisLoading ] = useState(false);
+     
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const apikey = import.meta.env.VITE_API_KEY;
 
   async function fetchDetail() {
+    setisLoading(true)
     const res = await fetch(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apikey}&language=en-US&append_to_response=videos,credits,similar`
     );
     const data = await res.json();
     setMovie(data);
+    setisLoading(false)
   }
-
   useEffect(() => {
     fetchDetail();
     window.scrollTo(0, 0);
   }, [movieId]);
 
-  if (!movie) return <p className="text-white p-10">Loading...</p>;
+  if (!movie) return <div className="h-full w-full flex justify-center items-center"><p className="text-white p-10">Loading...</p></div>;
 
   const trailer = movie.videos?.results?.find(
     (v) => v.type === "Trailer" && v.site === "YouTube"
@@ -29,13 +32,18 @@ function DetailedPage() {
   const cast = movie.credits?.cast?.slice(0, 6) || [];
 
   return (
-    <div className="w-full min-h-screen bg-black text-white">
-      {/* Backdrop hero */}
+    <div className="w-full min-h-screen bg-black text-white absolute">
+      {isLoading ? (
+ <div className="liner w-full h-1 bg-orange-600 mt-20  animate-ping"></div>
+  ): (
+     <div className="liner w-full h-1 bg-red-600 mt-20"></div>
+  )
+}
       <div className="relative w-full h-[70vh]">
         <img
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
-          className="w-full h-full object-cover"
+          className="w-full h-full object-cover "
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
 
@@ -67,10 +75,10 @@ function DetailedPage() {
                 rel="noreferrer"
                 className="bg-red-600 px-6 py-3 rounded-md font-bold"
               >
-                Watch Trailer
+                Watch Trailer 
               </a>
             )}
-            <Bookedmarked items={movie} size={35} />
+          
           </div>
         </div>
       </div>
