@@ -1,45 +1,46 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState } from "react";
-import Bookedmarked from "../components/Bookedmarked";
 
 function DetailedPage() {
-      const [ isLoading, setisLoading ] = useState(false);
-     
+  const [isLoading, setIsLoading] = useState(true);
+  const [showFullDescription, setShowFullDescription] = useState(false);
+
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
   const apikey = import.meta.env.VITE_API_KEY;
 
   async function fetchDetail() {
-    setisLoading(true)
+    setIsLoading(true);
     const res = await fetch(
       `https://api.themoviedb.org/3/movie/${movieId}?api_key=${apikey}&language=en-US&append_to_response=videos,credits,similar`
     );
     const data = await res.json();
     setMovie(data);
-    setisLoading(false)
+    setIsLoading(false);
   }
+
   useEffect(() => {
     fetchDetail();
     window.scrollTo(0, 0);
   }, [movieId]);
 
-  if (!movie) return <div className="h-full w-full flex justify-center items-center"><p className="text-white p-10">Loading...</p></div>;
+  if (isLoading && !movie) {
+    return (
+      <div className="h-full w-full flex justify-center items-center">
+        <p className="text-white p-10">Loading...</p>
+      </div>
+    );
+  }
 
   const trailer = movie.videos?.results?.find(
     (v) => v.type === "Trailer" && v.site === "YouTube"
   );
   const director = movie.credits?.crew?.find((c) => c.job === "Director");
   const cast = movie.credits?.cast?.slice(0, 6) || [];
-
   return (
-    <div className="w-full min-h-screen bg-black text-white absolute">
-      {isLoading ? (
- <div className="liner w-full h-1 bg-orange-600 mt-20  animate-ping"></div>
-  ): (
-     <div className="liner w-full h-1 bg-red-600 mt-20"></div>
-  )
-}
-      <div className="relative w-full h-[70vh]">
+    <div className="w-full min-h-screen bg-black text-white ">
+  
+      <div className="relative w-full h-[80vh]">
         <img
           src={`https://image.tmdb.org/t/p/original${movie.backdrop_path}`}
           alt={movie.title}
@@ -47,16 +48,28 @@ function DetailedPage() {
         />
         <div className="absolute inset-0 bg-gradient-to-t from-black via-black/60 to-transparent"></div>
 
-        <div className="absolute bottom-10 left-10 max-w-2xl">
+        <div className="absolute bottom-10 left-20 max-w-2xl">
           <h1 className="text-6xl font-bold mb-4">{movie.title}</h1>
-          <p className="text-gray-300 mb-4">{movie.overview}</p>
+        <div className="max-w-2xl mb-8">
+          <p className={showFullDescription ? "" : "line-clamp-3"}>
+            {movie.overview}
+          </p>
+          {movie.overview?.length > 200 && (
+            <button
+              onClick={() => setShowFullDescription(!showFullDescription)}
+              className="text-red-500 font-semibold text-sm mt-2"
+            >
+              {showFullDescription ? "View Less" : "View More"}
+            </button>
+          )}
+        </div>
 
           <div className="flex gap-4 items-center mb-4 text-sm text-gray-400">
             <span>{movie.release_date}</span>
             <span>•</span>
             <span>{movie.runtime} min</span>
             <span>•</span>
-            <span>⭐ {movie.vote_average?.toFixed(1)}</span>
+            <span> {movie.vote_average?.toFixed(1)}</span>
           </div>
 
           <div className="flex gap-3 flex-wrap mb-4">
@@ -83,7 +96,7 @@ function DetailedPage() {
         </div>
       </div>
 
-      {/* Director + Cast */}
+      
       <div className="p-10">
         {director && (
           <p className="mb-6 text-lg">
@@ -111,10 +124,10 @@ function DetailedPage() {
           ))}
         </div>
 
-        {/* Similar movies */}
+        
         <h2 className="text-2xl font-bold mt-10 mb-4">Similar Movies</h2>
         <div className="flex gap-4 overflow-x-auto pb-4">
-          {movie.similar?.results?.slice(0, 8).map((sim) => (
+          {movie.similar?.results?.slice(0, 7).map((sim) => (
             <Link key={sim.id} to={`/movie/${sim.id}`} className="w-40 shrink-0">
               <img
                 src={`https://image.tmdb.org/t/p/w500${sim.poster_path}`}

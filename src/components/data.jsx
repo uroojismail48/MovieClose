@@ -5,7 +5,7 @@ import NewMovies from "../pages/NewMovies";
 import AllGenres from "../pages/AllGenres"
 import { Route, Routes } from "react-router-dom";
 import Series from "../pages/Series";
-
+import SeriesDetails from "../pages/SeriesDetails";
 import WishList from "../pages/WishList";
 import DetailedPage from "../pages/Detailedpage";
 
@@ -40,7 +40,7 @@ function Data() {
                   <Route path="/Series" element={<Series/>}/>
                   <Route path="/Wishlists" element={<WishList/>}/>
       <Route path="/movie/:movieId" element={<DetailedPage/>}/>
-
+<Route path="/series/:seriesId" element={<SeriesDetails />} />
 </Routes>
 
     </div>

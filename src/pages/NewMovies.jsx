@@ -152,7 +152,7 @@ Genre
 
        </div> 
 <div className="w-full flex flex-wrap 
-gap-14 px-10 justify-center items-center  ">
+gap-4 px-4 justify-center items-center  ">
 {movies.map((movie) => (
   <div className="group w-60 h-80 rounded-md relative" key={movie.id}>
     <Link to={`/movie/${movie.id}`} className="absolute inset-0 z-0">
@@ -162,7 +162,7 @@ gap-14 px-10 justify-center items-center  ">
         alt={movie.title}
       />
       <div className="absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
-      <h1 className="absolute backdrop-blur-[2px] text-bold">{movie.title}</h1>
+      <h1 className="absolute backdrop-blur-[2px] text-bold bottom-0">{movie.title}</h1>
     </Link>
 
  
@@ -177,15 +177,19 @@ gap-14 px-10 justify-center items-center  ">
 
     <div className="z-10 relative ">
       <Bookedmarked items={movie} />
-      <h1 className="absolute top-50 right-0 font-bold">{movie.original_language}</h1>
+    
       {now < new Date(movie.release_date).getTime() ? (
-        <h1 className="absolute bottom-0 left-0 font-bold">
+        <h1 className="absolute  left-0 font-bold">
           Coming Soon : {movie.release_date}
         </h1>
       ) : (
         <h1 className="absolute bottom-0 left-0 font-bold">Released</h1>
       )}
     </div>
+         <h1 className="absolute bottom-0 right-0 font-bold">
+                  {movie.original_language}
+                </h1>
+               
   </div>
 ))}
 

@@ -12,7 +12,7 @@ function AllGenres() {
   const [page, setPage] = useState(1);
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(1);
-
+  const [now] = useState(() => Date.now());
   const genres = [
     { id: "28", name: "Action" },
     { id: "12", name: "Adventure" },
@@ -189,10 +189,10 @@ function AllGenres() {
 
               <div className="absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
 
-              <h1 className="absolute backdrop-blur-[2px] text-bold">
+              <h1 className="absolute backdrop-blur-[2px] text-bold bottom-0">
                 {movie.title}
               </h1>
-                <Bookedmarked items={movie} />
+              
             </Link>
              <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center z-10 pointer-events-none group-hover:pointer-events-auto">
                   <Link
@@ -203,18 +203,26 @@ function AllGenres() {
                   </Link>
                 </div>
             
+                <div className="z-10 relative ">
+                  <Bookedmarked items={movie} />
+                             {now < new Date(movie.release_date).getTime() ? (
+                    <h1 className="absolute bottom-0 left-0 font-bold">
+                      Coming Soon : {movie.release_date}
+                    </h1>
+                  ) : (
+                    <h1 className="absolute bottom-0 left-0 font-bold">Released</h1>
+                  )}
+                </div>
           
             <h1 className="absolute bottom-0 right-0 font-bold">
               {movie.original_language}
             </h1>
-            <h1 className="absolute bottom-0 left-0 font-bold">
-              {movie.release_date}
-            </h1>
+            
           </div>
         ))}
       </div>
 
-      {/* Pagination */}
+    
       <div className="w-full p-6 flex gap-10 justify-center items-center bg-black font-bold">
         <button onClick={prevPage} className="cursor-pointer h-10" disabled={page === 1}>
           <RiArrowLeftLine />
