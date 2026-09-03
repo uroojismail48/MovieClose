@@ -14,7 +14,7 @@ const bookmarked = useSelector((state) =>  state.bookmark.bookmarked)
     <div className="w-full min-h-screen bg-black text-white p-6 ">
       <div className="liner w-full h-1 bg-purple-600 my-20">      </div>
 <h1 className="text-4xl font-bold mb-8  px-20">My Wishlist</h1>
-<ViewDetails/>
+
       {bookmarked.length === 0 ? (
         <p className="text-gray-400">No movies bookmarked yet.</p>
       ) : (
