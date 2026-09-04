@@ -43,6 +43,18 @@ export const movieApi = createApi({
       query: ({ page = 1 }) =>
         `/discover/movie?api_key=${apikey}&include_adult=true&sort_by=popularity.desc&page=${page}`,
     }),
+    getMoviesByGenre: builder.query({
+  query: ({ genreId, page = 1 }) =>
+    `/discover/movie?api_key=${apikey}&with_genres=${genreId}&sort_by=popularity.desc&page=${page}`,
+}),
+getMoviesByCountry: builder.query({
+  query: ({ country, page = 1 }) =>
+    `/discover/movie?api_key=${apikey}&with_origin_country=${country}&sort_by=popularity.desc&page=${page}`,
+}),
+getAdultMovies: builder.query({
+  query: ({ page = 1 }) =>
+    `/discover/movie?api_key=${apikey}&include_adult=true&sort_by=popularity.desc&page=${page}`,
+}),
   }),
 });
 
@@ -55,4 +67,7 @@ export const {
   useGetSeriesByGenreQuery,
   useGetMoviesByCountryQuery,
   useGetAdultMoviesQuery,
+  
+
+ 
 } = movieApi;

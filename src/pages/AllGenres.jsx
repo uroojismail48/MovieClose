@@ -1,17 +1,20 @@
 import { RiArrowLeftLine, RiArrowRightLine } from "@remixicon/react";
 import { useEffect, useState } from "react";
 import Bookedmarked from "../components/Bookedmarked";
-
+import {
+  useGetMoviesByGenreQuery,
+  useGetMoviesByCountryQuery,
+  useGetAdultMoviesQuery,
+} from "../redux/FetchMovie";
 import { Link } from "react-router-dom";
 function AllGenres() {
-  const apikey = import.meta.env.VITE_API_KEY;
 
-  const [activeTab, setActiveTab] = useState("genre"); // "genre" | "country" | "adult"
+  const [activeTab, setActiveTab] = useState("genre"); 
   const [selectedGenre, setSelectedGenre] = useState("28");
   const [selectedCountry, setSelectedCountry] = useState("US");
   const [page, setPage] = useState(1);
-  const [movies, setMovies] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
+
+
   const [now] = useState(() => Date.now());
   const genres = [
     { id: "28", name: "Action" },
@@ -42,25 +45,30 @@ function AllGenres() {
     { code: "CN", name: "China" },
   ];
 
-  async function fetchMovies() {
-    let url;
+  const genreResult = useGetMoviesByGenreQuery(
+    { genreId: selectedGenre, page },
+    { skip: activeTab !== "genre" }
+  );
 
-    if (activeTab === "genre") {
-      url = `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&with_genres=${selectedGenre}&sort_by=popularity.desc&page=${page}`;
-    } else if (activeTab === "country") {
-      url = `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&with_origin_country=${selectedCountry}&sort_by=popularity.desc&page=${page}`;
-    } else if (activeTab === "adult") {
-      url = `https://api.themoviedb.org/3/discover/movie?api_key=${apikey}&include_adult=true&sort_by=popularity.desc&page=${page}`;
-    }
+  const countryResult = useGetMoviesByCountryQuery(
+    { country: selectedCountry, page },
+    { skip: activeTab !== "country" }
+  );
 
-    const res = await fetch(url);
-    const data = await res.json();
-    setMovies(data.results);
-    setTotalPages(data.total_pages);
-  }
+  const adultResult = useGetAdultMoviesQuery(
+    { page },
+    { skip: activeTab !== "adult" }
+  );
+  const activeResult =
+    activeTab === "genre" ? genreResult :
+    activeTab === "country" ? countryResult :
+    adultResult;
+     const { data, isLoading, isError } = activeResult;
+  const movies = data?.results || [];
+  const totalPages = data?.total_pages || 1;
 
   useEffect(() => {
-    fetchMovies();
+   
     window.scrollTo(0, 0);
   }, [activeTab, selectedGenre, selectedCountry, page]);
 
