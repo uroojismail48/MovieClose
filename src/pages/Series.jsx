@@ -145,7 +145,15 @@ setDebouncedSearch(searchQuery)
       </div>
 
       <div className="w-full flex flex-wrap gap-4 px-4 justify-center items-center">
-        {series.map((serie) => (
+        {isLoading ? (
+           <div className="liner w-full h-1 bg-red-600 mt-20"></div>
+
+        ) : series.length === 0 ? (
+ <p className="text-white text-center w-full text-xl">
+    No series found. Try a different search or genre.
+  </p>
+           ) : (
+         series.map((serie) => (
           <div className="group w-60 h-80 rounded-md relative" key={serie.id}>
             <img
               className="h-full w-full absolute object-cover"
@@ -187,7 +195,9 @@ setDebouncedSearch(searchQuery)
      
             </div>
           </div>
-        ))}
+        ))
+        ) }
+     
       </div>
 
       <div className="w-full p-6 flex gap-10 justify-center items-center bg-black font-bold">

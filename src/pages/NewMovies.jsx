@@ -85,7 +85,11 @@ setDebouncedSearch(searchQuery)
     <div className="bg-black h-screen w-full absolute text-white ">
   {isLoading ? (
  <div className="liner w-full h-1 bg-orange-600 mt-20  animate-ping"></div>
-  ): (
+  ) : movies.length=== 0 ? (
+ <p className="text-white text-center w-full text-xl">
+    No movies found. Try a different search or genre.
+  </p>
+  ) : (
      <div className="liner w-full h-1 bg-red-600 mt-20"></div>
   )
 }

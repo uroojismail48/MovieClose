@@ -182,27 +182,38 @@ function AllGenres() {
 
 
       <div className="w-full flex flex-wrap gap-4 px-4 justify-center items-center">
-        {movies.map((movie) => (
-          <div className="group w-60 h-80 rounded-md relative" key={movie.id}>
-            <Link to={`/movie/${movie.id}`} className="absolute inset-0 z-0">
-              <img
-                className="h-full w-full absolute object-cover rounded-md"
-                src={
-                  movie.poster_path
-                    ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-                    : "/fallback.jpg"
-                }
-                alt={movie.title}
-              />
+        {isLoading ? (
+          <div className="text-red-600">Loading...</div>
+        ) : movies.length === 0 ? (
+          <p className="text-white text-center w-full text-xl">
+            No movies found. Try a different search or genre.
+          </p>
+        ) : (
+          movies.map((movie) => {
+            const releaseDate = movie.release_date ? new Date(movie.release_date).getTime() : null;
+            const isComingSoon = releaseDate !== null && now < releaseDate;
 
-              <div className="absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
+            return (
+              <div className="group w-60 h-80 rounded-md relative" key={movie.id}>
+                <Link to={`/movie/${movie.id}`} className="absolute inset-0 z-0">
+                  <img
+                    className="h-full w-full absolute object-cover rounded-md"
+                    src={
+                      movie.poster_path
+                        ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
+                        : "/fallback.jpg"
+                    }
+                    alt={movie.title}
+                  />
 
-              <h1 className="absolute backdrop-blur-[2px] text-bold bottom-0">
-                {movie.title}
-              </h1>
-              
-            </Link>
-             <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center z-10 pointer-events-none group-hover:pointer-events-auto">
+                  <div className="absolute w-full h-full inset-0 bg-gradient-to-b from-black via-black/30 to-transparent"></div>
+
+                  <h1 className="absolute backdrop-blur-[2px] text-bold bottom-0">
+                    {movie.title}
+                  </h1>
+                </Link>
+
+                <div className="absolute inset-0 bg-black/70 opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex justify-center items-center z-10 pointer-events-none group-hover:pointer-events-auto">
                   <Link
                     to={`/movie/${movie.id}`}
                     className="border flex py-3 px-4 gap-3 rounded-md bg-white/20 cursor-pointer font-bold hover:bg-white hover:text-black transition"
@@ -210,10 +221,10 @@ function AllGenres() {
                     View Description
                   </Link>
                 </div>
-            
-                <div className="z-10 relative ">
+
+                <div className="z-10 relative">
                   <Bookedmarked items={movie} />
-                             {now < new Date(movie.release_date).getTime() ? (
+                  {isComingSoon ? (
                     <h1 className="absolute bottom-0 left-0 font-bold">
                       Coming Soon : {movie.release_date}
                     </h1>
@@ -221,16 +232,16 @@ function AllGenres() {
                     <h1 className="absolute bottom-0 left-0 font-bold">Released</h1>
                   )}
                 </div>
-          
-            <h1 className="absolute bottom-0 right-0 font-bold">
-              {movie.original_language}
-            </h1>
-            
-          </div>
-        ))}
+
+                <h1 className="absolute bottom-0 right-0 font-bold">
+                  {movie.original_language}
+                </h1>
+              </div>
+            );
+          })
+        )}
       </div>
 
-    
       <div className="w-full p-6 flex gap-10 justify-center items-center bg-black font-bold">
         <button onClick={prevPage} className="cursor-pointer h-10" disabled={page === 1}>
           <RiArrowLeftLine />
@@ -240,7 +251,8 @@ function AllGenres() {
           <RiArrowRightLine />
         </button>
       </div>
-    </div>
+      </div>
+  
   );
 }
 
