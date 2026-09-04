@@ -8,7 +8,7 @@ import Series from "../pages/Series";
 import SeriesDetails from "../pages/SeriesDetails";
 import WishList from "../pages/WishList";
 import DetailedPage from "../pages/Detailedpage";
-
+import NotFound from "../pages/404Page";
 
 function Data() {
   const [movies, setMovies] = useState([]);
@@ -41,6 +41,7 @@ function Data() {
                   <Route path="/Wishlists" element={<WishList/>}/>
       <Route path="/movie/:movieId" element={<DetailedPage/>}/>
 <Route path="/series/:seriesId" element={<SeriesDetails />} />
+<Route  path="*" element={<NotFound />} />
 </Routes>
 
     </div>

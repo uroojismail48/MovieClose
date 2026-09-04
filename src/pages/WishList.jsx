@@ -2,7 +2,6 @@
 import { RiBookmarkFill } from "@remixicon/react";
 import { useDispatch, useSelector } from "react-redux";
 import { toggleBookmark } from "../redux/BookmarkSlice";
-import ViewDetails from "../components/ViewDetails";
 
 function Wishlist() {
  const dispatch =  useDispatch()
