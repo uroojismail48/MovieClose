@@ -1,37 +1,45 @@
 import { RiArrowLeftLine, RiArrowRightLine, RiSearchLine } from "@remixicon/react";
 import { useEffect, useState } from "react";
 import Bookedmarked from "../components/Bookedmarked";
+import {
+  useGetPopularSeriesQuery,
+  useSearchSeriesQuery,
+  useGetSeriesByGenreQuery,
+} from "../redux/FetchMovie";
 
 import { Link } from "react-router-dom";
 
 function Series() {
    const [now] = useState(() => Date.now());
-  const apikey = import.meta.env.VITE_API_KEY;
+
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
   const [page, setPage] = useState(1);
-  const [series, setSeries] = useState([]);
-  const [totalPages, setTotalPages] = useState(1);
 
-  async function fetchSeries() {
-    let url;
-    if (searchQuery !== "") {
-      url = `https://api.themoviedb.org/3/search/tv?api_key=${apikey}&query=${searchQuery}&language=en-US&page=${page}`;
-    } else if (selectedGenre !== "") {
-      url = `https://api.themoviedb.org/3/discover/tv?api_key=${apikey}&with_genres=${selectedGenre}&sort_by=popularity.desc&page=${page}`;
-    } else {
-      url = `https://api.themoviedb.org/3/tv/popular?api_key=${apikey}&language=en-US&page=${page}`;
-    }
+ const popularResult = useGetPopularSeriesQuery(
+    { page },
+    { skip: searchQuery !== "" || selectedGenre !== "" }
+  );
 
-    const res = await fetch(url);
-    const data = await res.json();
-    setSeries(data.results);
-    setTotalPages(data.total_pages);
-  }
+  const searchResult = useSearchSeriesQuery(
+    { query: searchQuery, page },
+    { skip: searchQuery === "" }
+  );
+  const genreResult = useGetSeriesByGenreQuery(
+    { genreId: selectedGenre, page },
+    { skip: selectedGenre === "" }
+  );
+    const activeResult = searchQuery
+    ? searchResult
+    : selectedGenre
+    ? genreResult
+    : popularResult;
 
+      const { data, isLoading, isError } = activeResult;
+  const series = data?.results || [];
+  const totalPages = data?.total_pages || 1;
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    fetchSeries();
     window.scrollTo(0, 0);
   }, [page, searchQuery, selectedGenre]);
 
