@@ -1,6 +1,6 @@
 import { RiArrowLeftLine, RiArrowRightLine, RiSearchLine } from "@remixicon/react";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import Bookedmarked from "../components/Bookedmarked";
 import {
@@ -12,7 +12,9 @@ import { Link } from "react-router-dom";
 
   function NewMovies() {
   const [page, setPage] = useState(1);
+   const [debouncedSearch,setDebouncedSearch] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
+ 
   const [selectedGenre, setSelectedGenre] = useState("");
   const [now] = useState(() => Date.now());
 
@@ -22,8 +24,8 @@ import { Link } from "react-router-dom";
   );
 
   const searchResult = useSearchMoviesQuery(
-    { query: searchQuery, page },
-    { skip: searchQuery === "" }
+    { query: debouncedSearch, page },
+    { skip: debouncedSearch === "" }
   );
 
   const genreResult = useGetMoviesByGenreQuery(
@@ -31,7 +33,7 @@ import { Link } from "react-router-dom";
     { skip: selectedGenre === "" }
   );
 
-  const activeResult = searchQuery
+  const activeResult = debouncedSearch
     ? searchResult
     : selectedGenre
     ? genreResult
@@ -41,6 +43,12 @@ import { Link } from "react-router-dom";
   const movies = data?.results || [];
   const totalPages = data?.total_pages || 1;
 
+useEffect(()=> {
+  const timer = setTimeout(()=> {
+setDebouncedSearch(searchQuery)
+  },500);
+  return () => clearTimeout(timer)
+},[searchQuery])
   function nextPage() {
     if (page < totalPages) setPage(page + 1);
   }

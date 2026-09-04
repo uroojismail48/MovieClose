@@ -11,7 +11,7 @@ import { Link } from "react-router-dom";
 
 function Series() {
    const [now] = useState(() => Date.now());
-
+  const [debouncedSearch, setDebouncedSearch] = useState("");
   const [searchQuery, setSearchQuery] = useState("");
   const [selectedGenre, setSelectedGenre] = useState("");
   const [page, setPage] = useState(1);
@@ -22,14 +22,14 @@ function Series() {
   );
 
   const searchResult = useSearchSeriesQuery(
-    { query: searchQuery, page },
-    { skip: searchQuery === "" }
+    { query: debouncedSearch, page },
+    { skip: debouncedSearch === "" }
   );
   const genreResult = useGetSeriesByGenreQuery(
     { genreId: selectedGenre, page },
     { skip: selectedGenre === "" }
   );
-    const activeResult = searchQuery
+    const activeResult = debouncedSearch
     ? searchResult
     : selectedGenre
     ? genreResult
@@ -40,7 +40,13 @@ function Series() {
   const totalPages = data?.total_pages || 1;
   useEffect(() => {
     // eslint-disable-next-line react-hooks/set-state-in-effect
-    window.scrollTo(0, 0);
+ const timer =  setTimeout(()=> {
+setDebouncedSearch(searchQuery)
+    },500) 
+    return () => {
+      clearTimeout(timer)
+    }
+ 
   }, [page, searchQuery, selectedGenre]);
 
   function nextPage() {
